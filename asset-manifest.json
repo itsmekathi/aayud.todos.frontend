@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/aayud-todos-frontend/static/css/main.ff3d19c3.css",
-    "main.js": "/aayud-todos-frontend/static/js/main.a44480ab.js",
-    "static/js/453.b6aa2c16.chunk.js": "/aayud-todos-frontend/static/js/453.b6aa2c16.chunk.js",
-    "index.html": "/aayud-todos-frontend/index.html",
-    "main.ff3d19c3.css.map": "/aayud-todos-frontend/static/css/main.ff3d19c3.css.map",
-    "main.a44480ab.js.map": "/aayud-todos-frontend/static/js/main.a44480ab.js.map",
-    "453.b6aa2c16.chunk.js.map": "/aayud-todos-frontend/static/js/453.b6aa2c16.chunk.js.map"
+    "main.css": "/aayud.todos.frontend/static/css/main.ff3d19c3.css",
+    "main.js": "/aayud.todos.frontend/static/js/main.f6e06e5c.js",
+    "static/js/453.b6aa2c16.chunk.js": "/aayud.todos.frontend/static/js/453.b6aa2c16.chunk.js",
+    "index.html": "/aayud.todos.frontend/index.html",
+    "main.ff3d19c3.css.map": "/aayud.todos.frontend/static/css/main.ff3d19c3.css.map",
+    "main.f6e06e5c.js.map": "/aayud.todos.frontend/static/js/main.f6e06e5c.js.map",
+    "453.b6aa2c16.chunk.js.map": "/aayud.todos.frontend/static/js/453.b6aa2c16.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.ff3d19c3.css",
-    "static/js/main.a44480ab.js"
+    "static/js/main.f6e06e5c.js"
   ]
 }
