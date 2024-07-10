@@ -1,12 +1,10 @@
 import React from 'react';
 import Layout from './components/Layout';
 import TodoList from './components/todo/TodoList/TodoList';
-import AddTodoForm from './components/todo/AddTodoForm/AddTodoForm';
 import EditTodoForm from './components/todo/EditToDoForm';
 import {
   createBrowserRouter,
-  RouterProvider,
-  Route,
+  RouterProvider
 } from 'react-router-dom';
 
 const App = () => {

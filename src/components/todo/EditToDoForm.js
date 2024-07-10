@@ -3,24 +3,29 @@ import { Form, Button } from 'react-bootstrap';
 import api from '../../api/axiosConfig';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
+import Spinner from '../common/spinner/Spinner';
+
 
 const EditTodoForm = () => {
   const { todoId } = useParams(); // Get todoId from the URL parameter 
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   console.log('todoId: ', todoId);
 
   useEffect(() => {
     const fetchTodo = async () => {
       try {
+        setLoading(true);
         const response = await api.get(`/api/todos/${todoId}`);
         setTitle(response.data.title);
         setDescription(response.data.description);
       } catch (error) {
         console.error('Error fetching todo:', error);
       }
+      setLoading(false);
     };
 
     fetchTodo();
@@ -29,14 +34,17 @@ const EditTodoForm = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
+      setLoading(true);
       const todo = { title, description };
       await api.put(`/api/todos/${todoId}`, todo);
+      setLoading(false);
       toast.success('Updated todo successfully!');
       navigate('/');
     } catch (error) {
       console.error('Error updating todo:', error);
       toast.error('Error updating todo!');
     }
+
   };
 
   const handleCancel = (event) => {
@@ -44,7 +52,7 @@ const EditTodoForm = () => {
     navigate('/');
   }
 
-  return (
+  return (loading ? <Spinner /> :
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3">
         <Form.Label>Title</Form.Label>
