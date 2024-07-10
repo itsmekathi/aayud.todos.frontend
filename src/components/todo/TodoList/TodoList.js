@@ -1,15 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { ListGroup } from 'react-bootstrap';
 import api from '../../../api/axiosConfig';
+import { toast } from 'react-toastify';
 import TodoItem from '../TodoItem';
 import AddTodoForm from '../AddTodoForm/AddTodoForm';
 import Spinner from '../../common/spinner/Spinner';
-import { toast, ToastContainer } from 'react-toastify';
+import ConfirmDialog from '../../common/ConfirmDialog/ConfirmDialog';
 import './TodoList.css';
 
 const TodoList = () => {
   const [todos, setTodos] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [selectedTodoId, setselectedTodoId] = useState(false);
 
   useEffect(() => {
     // Fetch todos from the backend when the component mounts
@@ -29,10 +32,10 @@ const TodoList = () => {
     setLoading(false);
   }
 
-  const deleteTodo = async (id) => {
+  const deleteTodo = async () => {
     try {
       setLoading(true);
-      await api.delete(`/api/todos/${id}`);
+      await api.delete(`/api/todos/${selectedTodoId}`);
       const response = await api.get(`/api/todos`);
       setTodos(response.data);
       toast.success('Deleted todo successfully!');
@@ -40,6 +43,7 @@ const TodoList = () => {
       console.error("Failed to delete and fetch todos:", error);
       toast.error('Error updating todo and fetching data!');
     }
+    setShowConfirm(false);
     setLoading(false);
   }
 
@@ -56,6 +60,15 @@ const TodoList = () => {
     setLoading(false);
   };
 
+  const handleClose = () => {
+    setShowConfirm(false);
+  };
+
+  const handleDelete = (todoId) => {
+    setselectedTodoId(todoId);
+    setShowConfirm(true);
+  };
+
   return (
     <div>
       {loading ? <Spinner /> : (
@@ -66,10 +79,18 @@ const TodoList = () => {
             <ListGroup>
               {todos.map(todo => (
                 <ListGroup.Item key={todo._id}>
-                  <TodoItem key={todo._id} todo={todo} onDelete={deleteTodo} />
+                  <TodoItem key={todo._id} todo={todo} onDelete={handleDelete} />
                 </ListGroup.Item>
               ))}
             </ListGroup>
+            <ConfirmDialog
+              show={showConfirm}
+              handleClose={handleClose}
+              handleConfirm={deleteTodo}
+              title="Confirm Deletion"
+            >
+              Are you sure you want to delete this todo?
+            </ConfirmDialog>
           </div>
         </>
       )}
