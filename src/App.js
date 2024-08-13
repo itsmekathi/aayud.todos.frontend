@@ -6,8 +6,10 @@ import {
   createBrowserRouter,
   RouterProvider
 } from 'react-router-dom';
+import useDocumentTitle from './components/common/hooks/useDocumentTitle';
 
 const App = () => {
+  useDocumentTitle('Home Page');
   // Create a router instance
   const router = createBrowserRouter([
     {

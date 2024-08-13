@@ -36,7 +36,7 @@ const AddTodoForm = ({ onAddTodo }) => {
           />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Add Todo
+          Add todo
         </Button>
       </Form>
     </div>

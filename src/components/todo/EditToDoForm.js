@@ -5,6 +5,7 @@ import { useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Spinner from '../common/spinner/Spinner';
+import useDocumentTitle from '../common/hooks/useDocumentTitle';
 
 
 const EditTodoForm = () => {
@@ -14,6 +15,8 @@ const EditTodoForm = () => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   console.log('todoId: ', todoId);
+
+  useDocumentTitle('Edit to do item');
 
   useEffect(() => {
     const fetchTodo = async () => {
