@@ -1,19 +1,18 @@
-import React, { useState, useEffect } from 'react';
-import { Form, Button } from 'react-bootstrap';
-import api from '../../api/axiosConfig';
-import { useParams } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import { toast } from 'react-toastify';
-import Spinner from '../common/spinner/Spinner';
-
+import React, { useState, useEffect } from "react";
+import { Form, Button } from "react-bootstrap";
+import api from "../../api/axiosConfig";
+import { useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import Spinner from "../common/spinner/Spinner";
 
 const EditTodoForm = () => {
-  const { todoId } = useParams(); // Get todoId from the URL parameter 
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
+  const { todoId } = useParams(); // Get todoId from the URL parameter
+  const [title, setTitle] = useState("");
+  const [description, setDescription] = useState("");
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  console.log('todoId: ', todoId);
+  console.log("todoId: ", todoId);
 
   useEffect(() => {
     const fetchTodo = async () => {
@@ -23,7 +22,7 @@ const EditTodoForm = () => {
         setTitle(response.data.title);
         setDescription(response.data.description);
       } catch (error) {
-        console.error('Error fetching todo:', error);
+        console.error("Error fetching todo:", error);
       }
       setLoading(false);
     };
@@ -38,21 +37,22 @@ const EditTodoForm = () => {
       const todo = { title, description };
       await api.put(`/api/todos/${todoId}`, todo);
       setLoading(false);
-      toast.success('Updated todo successfully!');
-      navigate('/');
+      toast.success("Updated todo successfully!");
+      navigate("/");
     } catch (error) {
-      console.error('Error updating todo:', error);
-      toast.error('Error updating todo!');
+      console.error("Error updating todo:", error);
+      toast.error("Error updating todo!");
     }
-
   };
 
   const handleCancel = (event) => {
     event.preventDefault();
-    navigate('/');
-  }
+    navigate("/");
+  };
 
-  return (loading ? <Spinner /> :
+  return loading ? (
+    <Spinner />
+  ) : (
     <Form onSubmit={handleSubmit}>
       <Form.Group className="mb-3">
         <Form.Label>Title</Form.Label>
@@ -60,7 +60,7 @@ const EditTodoForm = () => {
           type="text"
           placeholder="Enter todo title"
           value={title}
-          onChange={e => setTitle(e.target.value)}
+          onChange={(e) => setTitle(e.target.value)}
         />
       </Form.Group>
       <Form.Group className="mb-3">
@@ -68,16 +68,18 @@ const EditTodoForm = () => {
         <Form.Control
           as="textarea"
           rows={3}
-          style={{ resize: 'none' }}
+          style={{ resize: "none" }}
           placeholder="Enter todo description"
           value={description}
-          onChange={e => setDescription(e.target.value)}
+          onChange={(e) => setDescription(e.target.value)}
         />
       </Form.Group>
       <Button variant="success" type="submit">
         Save Changes
       </Button>
-      <Button variant="danger" onClick={handleCancel}>Cancel</Button>
+      <Button variant="danger" onClick={handleCancel}>
+        Cancel
+      </Button>
     </Form>
   );
 };
