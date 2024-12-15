@@ -1,8 +1,9 @@
 // src/api/axiosConfig.js
-import axios from 'axios';
+import axios from "axios";
 
+const API_BASE_URL = "https://aayud-todos-backend-1.onrender.com";
 const api = axios.create({
-  baseURL: 'https://aayud-todos-backend-1.onrender.com'
+  baseURL: API_BASE_URL,
 });
 
 export default api;
